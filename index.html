@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iFIXpath - Next Gen IT Solutions</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- CSS Reset & Base Styles --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth; /* Smooth scrolling enabled */
+        }
+
+        body {
+            background-color: #050505;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* --- Navigation Bar --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(5, 5, 5, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 255, 255, 0.1);
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            color: #fff;
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: #00f3ff; /* Neon Cyan */
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #00f3ff;
+            text-shadow: 0 0 10px #00f3ff;
+        }
+
+        /* --- Hero Section & 3D Canvas --- */
+        #home {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        #bg-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .hero-content {
+            z-index: 1;
+            padding: 20px;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            background: linear-gradient(90deg, #00f3ff, #aa00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            color: #cccccc;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #fff;
+            background: transparent;
+            border: 2px solid #00f3ff;
+            border-radius: 30px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
+        }
+
+        .btn:hover {
+            background: #00f3ff;
+            color: #000;
+            box-shadow: 0 0 30px #00f3ff;
+        }
+
+        /* --- Sections General --- */
+        section {
+            padding: 100px 10vw;
+            min-height: 100vh;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 60px;
+            color: #00f3ff;
+            position: relative;
+        }
+
+        /* --- Services Section --- */
+        .services-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .service-card {
+            background: #111;
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid #222;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 15px 40px rgba(0, 243, 255, 0.2);
+            border-color: #00f3ff;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .service-card p {
+            color: #aaa;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* --- Scroll Reveal Animation Classes --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(100px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- Footer --- */
+        footer {
+            background: #0a0a0a;
+            text-align: center;
+            padding: 30px;
+            border-top: 1px solid #222;
+            color: #777;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .nav-links { display: none; } /* Simple hide for mobile, can add hamburger menu later */
+            .hero-title { font-size: 2.5rem; }
+            section { padding: 80px 5vw; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#home" class="logo">iFIX<span>path</span></a>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <header id="home">
+        <canvas id="bg-canvas"></canvas>
+        
+        <div class="hero-content reveal active">
+            <h1 class="hero-title">Future of Tech is Here</h1>
+            <p class="hero-subtitle">iFIXpath delivers cutting-edge IT solutions, from software development to futuristic infrastructure. We build your digital tomorrow, today.</p>
+            <a href="#services" class="btn">Explore Solutions</a>
+        </div>
+    </header>
+
+    <section id="services">
+        <h2 class="section-title reveal">Our Services</h2>
+        <div class="services-container">
+            <div class="service-card reveal">
+                <h3>Custom Software</h3>
+                <p>Tailor-made software solutions designed to scale your business using the latest tech stacks and agile methodologies.</p>
+            </div>
+            <div class="service-card reveal">
+                <h3>Cloud Solutions</h3>
+                <p>Seamless cloud migration, management, and architecture ensuring zero downtime and maximum security.</p>
+            </div>
+            <div class="service-card reveal">
+                <h3>Cyber Security</h3>
+                <p>Advanced threat protection and vulnerability assessments to keep your company's digital assets safe 24/7.</p>
+            </div>
+            <div class="service-card reveal">
+                <h3>IT Consultancy</h3>
+                <p>Strategic technology consulting to help you optimize processes and align IT with your business goals.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" style="background: #080808;">
+        <h2 class="section-title reveal">About iFIXpath</h2>
+        <div class="reveal" style="text-align: center; max-width: 800px; margin: 0 auto;">
+            <p style="color: #bbb; font-size: 1.1rem; line-height: 1.8; margin-bottom: 20px;">
+                At iFIXpath, we believe in pushing the boundaries of technology. Our team of expert engineers and designers work tirelessly to provide innovative solutions for complex problems. 
+            </p>
+            <p style="color: #bbb; font-size: 1.1rem; line-height: 1.8;">
+                Whether you are a startup looking to make a mark or an enterprise aiming for digital transformation, iFIXpath is your trusted technology partner. We fix the present to pave the path for the future.
+            </p>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2 class="section-title reveal">Get in Touch</h2>
+        <div class="reveal" style="text-align: center;">
+            <p style="color: #aaa; margin-bottom: 40px;">Ready to start your next big project? Drop us a message.</p>
+            <a href="mailto:hello@ifixpath.com" class="btn" style="background: #00f3ff; color: #000; padding: 15px 50px;">Contact Us</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 iFIXpath. All Rights Reserved. Designed with passion.</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // Setup Three.js Scene
+        const canvas = document.querySelector('#bg-canvas');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+        
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        camera.position.setZ(30);
+
+        // Create a cool Wireframe TorusKnot
+        const geometry = new THREE.TorusKnotGeometry(10, 3, 100, 16);
+        const material = new THREE.MeshBasicMaterial({ color: 0x00f3ff, wireframe: true, transparent: true, opacity: 0.15 });
+        const torusKnot = new THREE.Mesh(geometry, material);
+        scene.add(torusKnot);
+
+        // Add Floating Particles
+        const particlesGeometry = new THREE.BufferGeometry();
+        const particlesCount = 700;
+        const posArray = new Float32Array(particlesCount * 3);
+
+        for(let i = 0; i < particlesCount * 3; i++) {
+            posArray[i] = (Math.random() - 0.5) * 100;
+        }
+
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+        const particlesMaterial = new THREE.PointsMaterial({
+            size: 0.2,
+            color: 0xaa00ff,
+            transparent: true,
+            opacity: 0.8
+        });
+
+        const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+        scene.add(particlesMesh);
+
+        // Animation Loop
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            // Rotate TorusKnot
+            torusKnot.rotation.x += 0.005;
+            torusKnot.rotation.y += 0.005;
+
+            // Rotate Particles
+            particlesMesh.rotation.y += 0.001;
+
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        // Handle Window Resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // Interactive Mouse Movement for 3D objects
+        document.addEventListener('mousemove', (event) => {
+            const mouseX = (event.clientX / window.innerWidth) - 0.5;
+            const mouseY = (event.clientY / window.innerHeight) - 0.5;
+            
+            torusKnot.rotation.x += mouseY * 0.05;
+            torusKnot.rotation.y += mouseX * 0.05;
+        });
+
+        // 2. Scroll Reveal Animations
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        // Trigger once on load
+        reveal();
+    </script>
+</body>
+</html>
